@@ -19,7 +19,7 @@
 
 /* Key matrix configuration. */
 #define MATRIX_ROW_PINS \
-    { GP26, GP5, GP4, GP9 }
+    { GP26, GP5, GP4, GP12 }
 #define MATRIX_COL_PINS \
     { GP28, GP21, GP6, GP7, GP8 }
 

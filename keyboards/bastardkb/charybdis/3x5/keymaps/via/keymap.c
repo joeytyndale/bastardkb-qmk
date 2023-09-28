@@ -48,8 +48,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ESC_MED LT(LAYER_MEDIA, KC_ESC)
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
 #define TAB_FUN LT(LAYER_FUNCTION, KC_TAB)
-#define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
-#define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
+#define SPC_SYM LT(LAYER_NUMERAL, KC_SPC)
+#define BSP_NUM LT(LAYER_SYMBOLS, KC_BSPC)
 #define _L_PTR(KC) LT(LAYER_POINTER, KC)
 
 #ifndef POINTING_DEVICE_ENABLE
@@ -65,12 +65,12 @@ static uint16_t auto_pointer_layer_timer = 0;
        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_QUOT, \
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
-                      ESC_MED, SPC_NAV, TAB_FUN, ENT_SYM, BSP_NUM
+                      ESC_MED, SPC_NAV, TAB_FUN, BSP_NUM, SPC_SYM 
 
 /** Convenience row shorthands. */
 #define _______________DEAD_HALF_ROW_______________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#define ______________HOME_ROW_GACS_L______________ KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX
-#define ______________HOME_ROW_GACS_R______________ XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI
+#define ______________HOME_ROW_GACS_L______________ KC_LSFT, KC_LALT, KC_LCTL, KC_LGUI, XXXXXXX
+#define ______________HOME_ROW_GACS_R______________ XXXXXXX, KC_LGUI, KC_LCTL, KC_LALT, KC_LSFT
 
 /*
  * Layers used on the Charybdis Nano.
@@ -125,7 +125,7 @@ static uint16_t auto_pointer_layer_timer = 0;
  */
 #define LAYOUT_LAYER_NAVIGATION                                                               \
     _______________DEAD_HALF_ROW_______________, _______________DEAD_HALF_ROW_______________, \
-    ______________HOME_ROW_GACS_L______________, KC_CAPS, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, \
+    ______________HOME_ROW_GACS_L______________,  KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT,KC_CAPS, \
     _______________DEAD_HALF_ROW_______________,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, \
                       XXXXXXX, _______, XXXXXXX,  KC_ENT, KC_BSPC
 
@@ -171,8 +171,8 @@ static uint16_t auto_pointer_layer_timer = 0;
     ...)                                                               \
              L00,         L01,         L02,         L03,         L04,  \
              R05,         R06,         R07,         R08,         R09,  \
-      LGUI_T(L10), LALT_T(L11), LCTL_T(L12), LSFT_T(L13),        L14,  \
-             R15,  RSFT_T(R16), RCTL_T(R17), LALT_T(R18), RGUI_T(R19), \
+      LSFT_T(L10), LALT_T(L11), LCTL_T(L12), LGUI_T(L13),        L14,  \
+             R15,  RGUI_T(R16), RCTL_T(R17), LALT_T(R18), RSFT_T(R19), \
       __VA_ARGS__
 #define HOME_ROW_MOD_GACS(...) _HOME_ROW_MOD_GACS(__VA_ARGS__)
 
@@ -267,3 +267,17 @@ void shutdown_user(void) {
     rgb_matrix_update_pwm_buffers();
 #endif // RGB_MATRIX_ENABLE
 }
+
+// Combos
+const uint16_t PROGMEM combo_enter[] = {RCTL_T(KC_K), LALT_T(KC_L), COMBO_END};
+const uint16_t PROGMEM combo_escape[] = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM combo_tab[] = {LCTL_T(KC_D), LGUI_T(KC_F), COMBO_END};
+const uint16_t PROGMEM combo_backspace[] = {KC_O, KC_I, COMBO_END};
+const uint16_t PROGMEM combo_colon[] = {RGUI_T(KC_J), RCTL_T(KC_K), COMBO_END};
+combo_t key_combos[] = {
+    COMBO(combo_escape, KC_ESC),
+    COMBO(combo_enter, KC_ENT),
+    COMBO(combo_tab, KC_TAB),
+    COMBO(combo_backspace, KC_BSPC),
+    COMBO(combo_colon, KC_COLN),
+};

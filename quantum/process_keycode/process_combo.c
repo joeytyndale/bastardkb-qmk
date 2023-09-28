@@ -27,6 +27,10 @@ extern combo_t  key_combos[];
 extern uint16_t COMBO_LEN;
 #endif
 
+#ifndef COMBO_LEN
+uint16_t COMBO_LEN = 5;
+#endif
+
 __attribute__((weak)) void process_combo_event(uint16_t combo_index, bool pressed) {}
 
 #ifndef COMBO_ONLY_FROM_LAYER
